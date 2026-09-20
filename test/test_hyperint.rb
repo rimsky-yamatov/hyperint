@@ -319,7 +319,7 @@ class TestHyperInt < Minitest::Test
   def test_large_power_with_large_base
     a = HyperInt.new("123456789")
 
-    assert_equal "286797186029971810519726348061", a.pow(HyperInt.new("3")).to_s
+    assert_equal "1881676371789154860897069", a.pow(HyperInt.new("3")).to_s
   end
 
   def test_to_i

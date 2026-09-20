@@ -34,9 +34,14 @@ class HyperInt
   end
 
   private
-
   def initialize_from_integer(value)
     @sign = value <=> 0
+
+    if value == 0
+      @digits = [0]
+      return
+    end
+
     value = value.abs
     @digits = []
 

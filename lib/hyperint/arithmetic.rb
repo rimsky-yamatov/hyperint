@@ -100,19 +100,27 @@ class HyperInt
     raise ArgumentError, "negative exponent" if other.negative?
 
     result = HyperInt.one
-    base = self.abs
+    base = abs
     exponent = other.abs
+    two = HyperInt.new(2)
 
     while !exponent.zero?
-      if exponent.mod(HyperInt.new(2)).equals?(HyperInt.one)
+      if exponent.mod(two).equals?(HyperInt.one)
         result = result.mul(base)
       end
 
-      exponent = exponent.div(HyperInt.new(2))
-      base = base.mul(base)
+      exponent = exponent.div(two)
+
+      unless exponent.zero?
+        base = base.mul(base)
+      end
     end
 
-    @sign < 0 && other.mod(HyperInt.new(2)).equals?(HyperInt.one) ? result.negate : result
+    if @sign < 0 && other.mod(two).equals?(HyperInt.one)
+      result.negate
+    else
+      result
+    end
   end
 
   private

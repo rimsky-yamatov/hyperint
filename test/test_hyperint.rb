@@ -330,7 +330,6 @@ class TestHyperInt < Minitest::Test
 
   def test_large_to_i
     value = "123456789012345678901234567890"
-
     assert_equal 123456789012345678901234567890, HyperInt.new(value).to_i
   end
 

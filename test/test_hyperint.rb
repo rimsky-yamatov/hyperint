@@ -198,4 +198,40 @@ class TestHyperInt < Minitest::Test
 
     assert_equal 116, result.to_i
   end
+
+  def test_large_addition
+    a = HyperInt.new("999999999999999999999999999999")
+    b = HyperInt.new("1")
+
+    assert_equal "1000000000000000000000000000000", a.add(b).to_s
+  end
+
+  def test_large_subtraction
+    a = HyperInt.new("1000000000000000000000000000000")
+    b = HyperInt.new("1")
+
+    assert_equal "999999999999999999999999999999", a.sub(b).to_s
+  end
+
+  def test_large_negative_addition
+    a = HyperInt.new("-1000000000000000000000000000000")
+    b = HyperInt.new("1")
+
+    assert_equal "-999999999999999999999999999999", a.add(b).to_s
+  end
+
+  def test_large_mixed_sign_addition
+    a = HyperInt.new("1000000000000000000000000000000")
+    b = HyperInt.new("-1")
+
+    assert_equal "999999999999999999999999999999", a.add(b).to_s
+  end
+
+  def test_large_negative_subtraction
+    a = HyperInt.new("-1000000000000000000000000000000")
+    b = HyperInt.new("1")
+
+    assert_equal "-1000000000000000000000000000001", a.sub(b).to_s
+  end
+
 end

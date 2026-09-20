@@ -35,6 +35,32 @@ class HyperInt
     add(other.negate)
   end
 
+  def mul(other)
+    check_type(other)
+    HyperInt.new(to_i * other.to_i)
+  end
+
+  def div(other)
+    check_type(other)
+    raise ZeroDivisionError, "divided by 0" if other.zero?
+
+    HyperInt.new(to_i / other.to_i)
+  end
+
+  def mod(other)
+    check_type(other)
+    raise ZeroDivisionError, "divided by 0" if other.zero?
+
+    HyperInt.new(to_i % other.to_i)
+  end
+
+  def pow(other)
+    check_type(other)
+    raise ArgumentError, "negative exponent" if other.negative?
+
+    HyperInt.new(to_i.pow(other.to_i))
+  end
+
   private
 
   def add_magnitudes(a, b)

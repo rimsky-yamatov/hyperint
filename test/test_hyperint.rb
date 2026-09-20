@@ -254,4 +254,40 @@ class TestHyperInt < Minitest::Test
     assert_equal "-121932631137021795226185032733622923332237463801111263526900", a.mul(b).to_s
   end
 
+  def test_large_division
+    a = HyperInt.new("999999999999999999999999999999")
+    b = HyperInt.new("3")
+
+    assert_equal "333333333333333333333333333333", a.div(b).to_s
+  end
+
+  def test_large_modulo
+    a = HyperInt.new("1000000000000000000000000000001")
+    b = HyperInt.new("999999999999999999999999999999")
+
+    assert_equal "2", a.mod(b).to_s
+  end
+
+  def test_large_division_with_remainder
+    a = HyperInt.new("123456789012345678901234567890")
+    b = HyperInt.new("123456789")
+
+    assert_equal "1000000000100000000010", a.div(b).to_s
+    assert_equal "0", a.mod(b).to_s
+  end
+
+  def test_negative_division
+    a = HyperInt.new("-1000000000000000000000")
+    b = HyperInt.new("3")
+
+    assert_equal "-333333333333333333333", a.div(b).to_s
+  end
+
+  def test_negative_modulo
+    a = HyperInt.new("-1000000000000000000000")
+    b = HyperInt.new("3")
+
+    assert_equal "-1", a.mod(b).to_s
+  end
+
 end

@@ -50,8 +50,6 @@ class HyperInt
     new(1)
   end
 
-  private
-
   def divide_small(divisor)
     result = []
     remainder = 0

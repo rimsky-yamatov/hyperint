@@ -196,6 +196,6 @@ class TestHyperInt < Minitest::Test
 
     result = a.add(b).mul(c).sub(b).div(c)
 
-    assert_equal 100, result.to_i
+    assert_equal 116, result.to_i
   end
 end

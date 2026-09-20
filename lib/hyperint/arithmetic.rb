@@ -37,7 +37,35 @@ class HyperInt
 
   def mul(other)
     check_type(other)
-    HyperInt.new(to_i * other.to_i)
+
+    return HyperInt.zero if zero? || other.zero?
+
+    result = Array.new(@digits.length + other.digits.length, 0)
+
+    @digits.each_with_index do |a, i|
+      carry = 0
+
+      other.digits.each_with_index do |b, j|
+        index = i + j
+        value = result[index] + a * b + carry
+
+        result[index] = value % BASE
+        carry = value / BASE
+      end
+
+      index = i + other.digits.length
+
+      while carry > 0
+        value = result[index] + carry
+        result[index] = value % BASE
+        carry = value / BASE
+        index += 1
+        result << 0 if index == result.length && carry > 0
+      end
+    end
+
+    sign = @sign == other.sign ? 1 : -1
+    build_from_digits(sign, result)
   end
 
   def div(other)

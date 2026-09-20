@@ -99,7 +99,20 @@ class HyperInt
     check_type(other)
     raise ArgumentError, "negative exponent" if other.negative?
 
-    HyperInt.new(to_i.pow(other.to_i))
+    result = HyperInt.one
+    base = self.abs
+    exponent = other.abs
+
+    while !exponent.zero?
+      if exponent.mod(HyperInt.new(2)).equals?(HyperInt.one)
+        result = result.mul(base)
+      end
+
+      exponent = exponent.div(HyperInt.new(2))
+      base = base.mul(base)
+    end
+
+    @sign < 0 && other.mod(HyperInt.new(2)).equals?(HyperInt.one) ? result.negate : result
   end
 
   private

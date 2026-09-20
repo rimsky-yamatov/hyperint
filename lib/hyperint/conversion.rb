@@ -58,15 +58,18 @@ class HyperInt
       current = remainder * BASE + digit
       quotient = current / divisor
       remainder = current % divisor
-
-      result.unshift(quotient)
+      result << quotient
     end
 
-    result.shift while result.length > 1 && result[0] == 0
+    result.reverse!
+
+    while result.length > 1 && result[-1] == 0
+      result.pop
+    end
 
     quotient = HyperInt.new(0)
-    quotient.instance_variable_set(:@sign, result == [0] ? 0 : 1)
-    quotient.instance_variable_set(:@digits, result.reverse)
+    quotient.instance_variable_set(:@sign, result == [0] ? 0 : @sign)
+    quotient.instance_variable_set(:@digits, result)
 
     [quotient, remainder]
   end

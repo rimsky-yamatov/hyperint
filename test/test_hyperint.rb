@@ -322,4 +322,16 @@ class TestHyperInt < Minitest::Test
     assert_equal "286797186029971810519726348061", a.pow(HyperInt.new("3")).to_s
   end
 
+  def test_to_i
+    assert_equal 123456789, HyperInt.new("123456789").to_i
+    assert_equal(-123456789, HyperInt.new("-123456789").to_i)
+    assert_equal 0, HyperInt.zero.to_i
+  end
+
+  def test_large_to_i
+    value = "123456789012345678901234567890"
+
+    assert_equal 123456789012345678901234567890, HyperInt.new(value).to_i
+  end
+
 end

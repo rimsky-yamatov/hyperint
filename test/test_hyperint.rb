@@ -234,4 +234,24 @@ class TestHyperInt < Minitest::Test
     assert_equal "-1000000000000000000000000000001", a.sub(b).to_s
   end
 
+  def test_large_multiplication
+    a = HyperInt.new("999999999999999999999999999999")
+    b = HyperInt.new("999999999999999999999999999999")
+
+    assert_equal "999999999999999999999999999998000000000000000000000000000001", a.mul(b).to_s
+  end
+
+  def test_large_multiplication_by_zero
+    a = HyperInt.new("999999999999999999999999999999")
+
+    assert_equal "0", a.mul(HyperInt.zero).to_s
+  end
+
+  def test_negative_multiplication
+    a = HyperInt.new("-123456789012345678901234567890")
+    b = HyperInt.new("987654321098765432109876543210")
+
+    assert_equal "-121932631137021795226185032733622923332237463801111263526900", a.mul(b).to_s
+  end
+
 end

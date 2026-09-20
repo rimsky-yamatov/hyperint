@@ -290,4 +290,36 @@ class TestHyperInt < Minitest::Test
     assert_equal "-1", a.mod(b).to_s
   end
 
+  def test_large_power
+    a = HyperInt.new("2")
+    b = HyperInt.new("100")
+
+    assert_equal "1267650600228229401496703205376", a.pow(b).to_s
+  end
+
+  def test_power_of_zero
+    a = HyperInt.new("123456789012345678901234567890")
+
+    assert_equal "1", a.pow(HyperInt.zero).to_s
+  end
+
+  def test_zero_power
+    a = HyperInt.zero
+
+    assert_equal "1", a.pow(HyperInt.zero).to_s
+  end
+
+  def test_negative_base_power
+    a = HyperInt.new("-2")
+
+    assert_equal "-32", a.pow(HyperInt.new("5")).to_s
+    assert_equal "64", a.pow(HyperInt.new("6")).to_s
+  end
+
+  def test_large_power_with_large_base
+    a = HyperInt.new("123456789")
+
+    assert_equal "286797186029971810519726348061", a.pow(HyperInt.new("3")).to_s
+  end
+
 end

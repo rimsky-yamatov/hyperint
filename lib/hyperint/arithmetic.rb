@@ -181,7 +181,7 @@ class HyperInt
   end
 
   def divide_magnitudes(dividend, divisor)
-    return [[0], [0]] if compare_magnitudes(dividend, divisor) < 0
+    return [[0], dividend.dup] if compare_magnitudes(dividend, divisor) < 0
 
     quotient = Array.new(dividend.length, 0)
     remainder = [0]
